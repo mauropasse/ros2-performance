@@ -40,36 +40,51 @@ install(FILES
   ${TOPOLOGY_FILES}
   DESTINATION lib/${PROJECT_NAME}/topology)
 
+set(SP topology/tests/single_process)
+
 set(TOPOLOGY_FILES_SINGLE_PROCESS
-  topology/tests/single_process/loaned_10b.json
-  topology/tests/single_process/loaned_1mb.json
-  topology/tests/single_process/loaned_4mb.json
-  topology/tests/single_process/pub_sub_10b_ipc_off.json
-  topology/tests/single_process/pub_sub_10b_ipc_on.json
-  topology/tests/single_process/pub_sub_4mb_ipc_off.json
-  topology/tests/single_process/pub_sub_4mb_ipc_on.json
+  ${SP}/loaned_10b.json
+  ${SP}/loaned_100kb.json
+  ${SP}/loaned_1mb.json
+  ${SP}/loaned_4mb.json
+  ${SP}/pub_sub_10b_ipc_on.json
+  ${SP}/pub_sub_100kb_ipc_on.json
+  ${SP}/pub_sub_1mb_ipc_on.json
+  ${SP}/pub_sub_4mb_ipc_on.json
+  ${SP}/pub_sub_10b_ipc_off.json
+  ${SP}/pub_sub_100kb_ipc_off.json
+  ${SP}/pub_sub_1mb_ipc_off.json
+  ${SP}/pub_sub_4mb_ipc_off.json
 )
 
 install(FILES
   ${TOPOLOGY_FILES_SINGLE_PROCESS}
-  DESTINATION lib/${PROJECT_NAME}/topology/tests/single_process)
+  DESTINATION lib/${PROJECT_NAME}/${SP})
+
+set(MP topology/tests/multi_process)
 
 set(TOPOLOGY_FILES_MULTI_PROCESS
-  topology/tests/multi_process/pub_ipc_off_10b.json
-  topology/tests/multi_process/pub_ipc_off_4mb.json
-  topology/tests/multi_process/pub_loaned_10b.json
-  topology/tests/multi_process/pub_loaned_1mb.json
-  topology/tests/multi_process/pub_loaned_4mb.json
-  topology/tests/multi_process/sub_ipc_off_10b.json
-  topology/tests/multi_process/sub_ipc_off_4mb.json
-  topology/tests/multi_process/sub_loaned_10b.json
-  topology/tests/multi_process/sub_loaned_1mb.json
-  topology/tests/multi_process/sub_loaned_4mb.json
+  ${MP}/pub_ipc_off_10b.json
+  ${MP}/pub_ipc_off_100kb.json
+  ${MP}/pub_ipc_off_1mb.json
+  ${MP}/pub_ipc_off_4mb.json
+  ${MP}/pub_loaned_10b.json
+  ${MP}/pub_loaned_100kb.json
+  ${MP}/pub_loaned_1mb.json
+  ${MP}/pub_loaned_4mb.json
+  ${MP}/sub_ipc_off_10b.json
+  ${MP}/sub_ipc_off_100kb.json
+  ${MP}/sub_ipc_off_4mb.json
+  ${MP}/sub_loaned_10b.json
+  ${MP}/sub_loaned_100kb.json
+  ${MP}/sub_loaned_1mb.json
+  ${MP}/sub_loaned_4mb.json
 )
+
 
 install(FILES
   ${TOPOLOGY_FILES_MULTI_PROCESS}
-  DESTINATION lib/${PROJECT_NAME}/topology/tests/multi_process)
+  DESTINATION lib/${PROJECT_NAME}/${MP})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
