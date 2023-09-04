@@ -68,13 +68,17 @@ set(TOPOLOGY_FILES_MULTI_PROCESS
   ${MP}/pub_ipc_off_100kb.json
   ${MP}/pub_ipc_off_1mb.json
   ${MP}/pub_ipc_off_4mb.json
+
   ${MP}/pub_loaned_10b.json
   ${MP}/pub_loaned_100kb.json
   ${MP}/pub_loaned_1mb.json
   ${MP}/pub_loaned_4mb.json
+
   ${MP}/sub_ipc_off_10b.json
   ${MP}/sub_ipc_off_100kb.json
+  ${MP}/sub_ipc_off_1mb.json
   ${MP}/sub_ipc_off_4mb.json
+
   ${MP}/sub_loaned_10b.json
   ${MP}/sub_loaned_100kb.json
   ${MP}/sub_loaned_1mb.json
