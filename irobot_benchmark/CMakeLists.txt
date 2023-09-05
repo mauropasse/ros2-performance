@@ -35,6 +35,7 @@ set(TOPOLOGY_FILES
   topology/sierra_nevada.json
   topology/sierra_nevada_loaned.json
   topology/white_mountain.json
+  topology/white_mountain_debug.json
   topology/white_mountain_loaned.json
 )
 
@@ -49,10 +50,12 @@ set(TOPOLOGY_FILES_SINGLE_PROCESS
   ${SP}/loaned_100kb.json
   ${SP}/loaned_1mb.json
   ${SP}/loaned_4mb.json
+
   ${SP}/pub_sub_10b_ipc_on.json
   ${SP}/pub_sub_100kb_ipc_on.json
   ${SP}/pub_sub_1mb_ipc_on.json
   ${SP}/pub_sub_4mb_ipc_on.json
+
   ${SP}/pub_sub_10b_ipc_off.json
   ${SP}/pub_sub_100kb_ipc_off.json
   ${SP}/pub_sub_1mb_ipc_off.json
