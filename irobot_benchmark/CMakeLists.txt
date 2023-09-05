@@ -26,14 +26,16 @@ install(TARGETS
 )
 
 set(TOPOLOGY_FILES
-  topology/sierra_nevada.json
   topology/cedar.json
-  topology/mont_blanc.json
-  topology/white_mountain.json
-  topology/debug_sierra_nevada_reliable.json
-  topology/debug_sierra_nevada_best_effort.json
-  topology/debug_mont_blanc_reliable.json
   topology/debug_mont_blanc_best_effort.json
+  topology/debug_mont_blanc_reliable.json
+  topology/debug_sierra_nevada_best_effort.json
+  topology/debug_sierra_nevada_reliable.json
+  topology/mont_blanc.json
+  topology/sierra_nevada.json
+  topology/sierra_nevada_loaned.json
+  topology/white_mountain.json
+  topology/white_mountain_loaned.json
 )
 
 install(FILES
@@ -85,10 +87,16 @@ set(TOPOLOGY_FILES_MULTI_PROCESS
   ${MP}/sub_loaned_4mb.json
 )
 
-
 install(FILES
   ${TOPOLOGY_FILES_MULTI_PROCESS}
   DESTINATION lib/${PROJECT_NAME}/${MP})
+
+set(PROFILES
+  profiles/fastdds_settings_shm.xml)
+
+install(FILES
+  ${PROFILES}
+  DESTINATION lib/${PROJECT_NAME}/profiles)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
