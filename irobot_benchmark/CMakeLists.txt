@@ -33,10 +33,16 @@ set(TOPOLOGY_FILES
   topology/debug_sierra_nevada_reliable.json
   topology/mont_blanc.json
   topology/sierra_nevada.json
+  topology/sierra_nevada_fixed_size.json
+  topology/sierra_nevada_fixed_size_loaned.json
   topology/sierra_nevada_loaned.json
+  topology/sierra_nevada_fixed_size_debug.json
   topology/white_mountain.json
-  topology/white_mountain_debug.json
   topology/white_mountain_loaned.json
+  topology/white_mountain_debug.json
+  topology/white_mountain_fixed_size.json
+  topology/white_mountain_fixed_size_loaned.json
+  topology/white_mountain_fixed_size_debug.json
 )
 
 install(FILES
