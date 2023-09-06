@@ -1,7 +1,7 @@
 {
   "nodes": [
       {
-        "node_name": "lyon",
+        "node_name": "debug_node",
         "subscribers":[
             {"topic_name":"amazon",   "msg_type":"stamped9_float32"},
             {"topic_name":"arkansas", "msg_type":"stamped4_int32"},
