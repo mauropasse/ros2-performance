@@ -101,7 +101,8 @@ install(FILES
   DESTINATION lib/${PROJECT_NAME}/${MP})
 
 set(PROFILES
-  profiles/fastdds_settings_shm.xml)
+  profiles/fastdds_settings_shm.xml
+  profiles/ignore_local_endpoints.xml)
 
 install(FILES
   ${PROFILES}
