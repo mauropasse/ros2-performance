@@ -33,16 +33,8 @@ set(TOPOLOGY_FILES
   topology/debug_sierra_nevada_reliable.json
   topology/mont_blanc.json
   topology/sierra_nevada.json
-  topology/sierra_nevada_fixed_size.json
-  topology/sierra_nevada_fixed_size_loaned.json
-  topology/sierra_nevada_loaned.json
-  topology/sierra_nevada_fixed_size_debug.json
-  topology/white_mountain.json
-  topology/white_mountain_loaned.json
   topology/white_mountain_debug.json
-  topology/white_mountain_fixed_size.json
-  topology/white_mountain_fixed_size_loaned.json
-  topology/white_mountain_fixed_size_debug.json
+  topology/white_mountain.json
 )
 
 install(FILES
@@ -99,6 +91,23 @@ set(TOPOLOGY_FILES_MULTI_PROCESS
 install(FILES
   ${TOPOLOGY_FILES_MULTI_PROCESS}
   DESTINATION lib/${PROJECT_NAME}/${MP})
+
+set(FT topology/tests/full_topologies)
+
+set(TEST_TOPOLOGY_FILES
+  ${FT}/sierra_nevada_fixed_size_debug.json
+  ${FT}/sierra_nevada_fixed_size.json
+  ${FT}/sierra_nevada_fixed_size_loaned.json
+  ${FT}/sierra_nevada_loaned.json
+  ${FT}/white_mountain_fixed_size_debug.json
+  ${FT}/white_mountain_fixed_size.json
+  ${FT}/white_mountain_fixed_size_loaned.json
+  ${FT}/white_mountain_loaned.json
+)
+
+install(FILES
+  ${TEST_TOPOLOGY_FILES}
+  DESTINATION lib/${PROJECT_NAME}/${FT})
 
 set(PROFILES
   profiles/fastdds_settings_shm.xml
