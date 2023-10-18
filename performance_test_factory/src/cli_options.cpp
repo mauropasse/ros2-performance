@@ -28,7 +28,6 @@ Options::Options()
   ros_params = true;
   name_threads = true;
   duration_sec = 5;
-  csv_out = false;
   resources_sampling_per_ms = 1000;
   tracking_options.is_enabled = false;
   tracking_options.late_percentage = 20;
