@@ -45,7 +45,7 @@ public:
 
   EventsLogger() = delete;
 
-  explicit EventsLogger(const std::string & filename, const bool csv_out = false);
+  EventsLogger(const std::string & filename, bool csv_out = false);
 
   void set_start_time(std::chrono::high_resolution_clock::time_point t);
 
