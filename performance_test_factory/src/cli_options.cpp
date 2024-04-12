@@ -53,6 +53,7 @@ void Options::parse(int argc, char ** argv)
   std::string tracking_enabled_option;
   std::string csv_out_option;
   std::string timers_separate_thread_option;
+  std::string result_folder_name_option;
   options.positional_help("FILE [FILE...]").show_positional_help();
   options.parse_positional({"topology"});
   options.add_options()("h,help", "print help")(
@@ -100,7 +101,9 @@ void Options::parse(int argc, char ** argv)
     cxxopts::value<std::string>(csv_out_option)->default_value(csv_out ? "on" : "off"), "on/off")(
     "timers-separate-thread",
     "use separate threads to execute timers",
-    cxxopts::value<std::string>(timers_separate_thread_option)->default_value(timers_separate_thread ? "on" : "off"), "on/off");
+    cxxopts::value<std::string>(timers_separate_thread_option)->default_value(timers_separate_thread ? "on" : "off"), "on/off")(
+    "results-dir", "name of the result directory (will use <topology>_log if not provided)",
+    cxxopts::value<std::string>(result_folder_name_option)->default_value(""), "NAME");
 
   try {
     auto result = options.parse(argc, argv);
@@ -129,6 +132,11 @@ void Options::parse(int argc, char ** argv)
 
     if (timers_separate_thread_option != "off" && timers_separate_thread_option != "on") {
       throw cxxopts::argument_incorrect_type(timers_separate_thread_option);
+    }
+
+    if (result_folder_name_option != "" && (result.count("topology") == 1)) {
+      // Only allow to set folder name if a single topology passed
+      result_folder_name = result_folder_name_option;
     }
   } catch (const cxxopts::OptionException & e) {
     std::cout << "Error parsing options. " << e.what() << std::endl;
@@ -165,7 +173,9 @@ std::ostream & operator<<(std::ostream & os, const Options & options)
   os << "timers_separate_thread: " << (options.timers_separate_thread ? "on" : "off") << std::endl;
   os << "tracking.is_enabled: " << (options.tracking_options.is_enabled ? "on" : "off")
      << std::endl;
-
+  if (options.result_folder_name != "" && options.topology_json_list.size() == 1) {
+    os << "results-dir: " << options.result_folder_name << std::endl;
+  }
   return os;
 }
 

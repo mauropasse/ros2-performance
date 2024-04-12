@@ -37,6 +37,7 @@ public:
   performance_metrics::Tracker::Options tracking_options;
   bool csv_out;
   bool timers_separate_thread;
+  std::string result_folder_name;
 };
 
 std::ostream & operator<<(std::ostream & os, const Options & options);
