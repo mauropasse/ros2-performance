@@ -5,8 +5,8 @@
         "publishers": [
               {
                   "topic_name": "test",
-                  "msg_type": "stamped100kb",
-                  "period_ms": 100,
+                  "msg_type": "stamped10b",
+                  "freq_hz": 2000,
                   "msg_pass_by":"shared_ptr"
               }
             ]

@@ -25,90 +25,97 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-set(FT topology/full_topologies)
-
-set(TEST_TOPOLOGY_FILES
-  ${FT}/cedar.json
-  ${FT}/debug_mont_blanc_best_effort.json
-  ${FT}/debug_mont_blanc_reliable.json
-  ${FT}/debug_sierra_nevada_best_effort.json
-  ${FT}/debug_sierra_nevada_reliable.json
-  ${FT}/debug_white_mountain_best_effort.json
-  ${FT}/mont_blanc.json
-  ${FT}/sierra_nevada.json
-  ${FT}/sierra_nevada_fixed_size.json
-  ${FT}/debug_sierra_nevada_fixed_size_best_effort.json
-  ${FT}/sierra_nevada_fixed_size_loaned.json
-  ${FT}/sierra_nevada_loaned.json
-  ${FT}/white_mountain.json
-  ${FT}/white_mountain_fixed_size.json
-  ${FT}/debug_white_mountain_fixed_size_best_effort.json
-  ${FT}/white_mountain_fixed_size_loaned.json
-  ${FT}/white_mountain_loaned.json
+set(TOPOLOGY_FILES
+  topology/sierra_nevada.json
+  topology/cedar.json
+  topology/mont_blanc.json
+  topology/white_mountain.json
+  topology/debug_sierra_nevada_reliable.json
+  topology/debug_sierra_nevada_best_effort.json
+  topology/debug_mont_blanc_reliable.json
+  topology/debug_mont_blanc_best_effort.json
 )
 
 install(FILES
-  ${TEST_TOPOLOGY_FILES}
-  DESTINATION lib/${PROJECT_NAME}/${FT})
+  ${TOPOLOGY_FILES}
+  DESTINATION lib/${PROJECT_NAME}/topology)
 
-set(SP topology/single_process)
-
-set(TOPOLOGY_FILES_SINGLE_PROCESS
-  ${SP}/pub_sub_loaned_10b.json
-  ${SP}/pub_sub_loaned_100kb.json
-  ${SP}/pub_sub_loaned_1mb.json
-  ${SP}/pub_sub_loaned_4mb.json
-
-  ${SP}/pub_sub_10b_ipc_on.json
-  ${SP}/pub_sub_100kb_ipc_on.json
-  ${SP}/pub_sub_1mb_ipc_on.json
-  ${SP}/pub_sub_4mb_ipc_on.json
-
-  ${SP}/pub_sub_10b_ipc_off.json
-  ${SP}/pub_sub_100kb_ipc_off.json
-  ${SP}/pub_sub_1mb_ipc_off.json
-  ${SP}/pub_sub_4mb_ipc_off.json
+set(SCRIPTS
+  scripts/plot_latency.py
+  scripts/plot_cpu_memory.py
 )
 
 install(FILES
-  ${TOPOLOGY_FILES_SINGLE_PROCESS}
+  ${SCRIPTS}
+  DESTINATION lib/${PROJECT_NAME}/scripts)
+
+# Communications benchamrk
+set(SP comms_benchmark/topologies)
+
+set(SP_TEST_TOPOLOGY_FILES
+  # Full topologies
+  ${SP}/sierra_nevada.json
+  ${SP}/sierra_nevada_fixed_size.json
+  ${SP}/sierra_nevada_fixed_size_loaned.json
+  ${SP}/white_mountain.json
+  ${SP}/white_mountain_fixed_size.json
+  ${SP}/white_mountain_fixed_size_loaned.json
+
+  # Simple pub / sub
+  ${SP}/pub_sub_10b.json
+  ${SP}/pub_sub_100kb.json
+  ${SP}/pub_sub_1mb.json
+  ${SP}/pub_sub_4mb.json
+
+  # Publishers loaning messages
+  ${SP}/pub_sub_10b_loaned.json
+  ${SP}/pub_sub_100kb_loaned.json
+  ${SP}/pub_sub_1mb_loaned.json
+  ${SP}/pub_sub_4mb_loaned.json
+
+  # Full topologies (remove the ones not needed)
+  ${SP}/debug_sierra_nevada_fixed_size.json
+  ${SP}/debug_white_mountain_fixed_size.json
+
+  # Simple pub / sub
+  ${SP}/pub_100kb.json
+  ${SP}/pub_100kb_loaned.json
+  ${SP}/pub_10b.json
+  ${SP}/pub_10b_loaned.json
+  ${SP}/pub_1mb.json
+  ${SP}/pub_1mb_loaned.json
+  ${SP}/pub_4mb.json
+  ${SP}/pub_4mb_loaned.json
+  ${SP}/sub_100kb.json
+  ${SP}/sub_10b.json
+  ${SP}/sub_1mb.json
+  ${SP}/sub_4mb.json
+)
+
+install(FILES
+  ${SP_TEST_TOPOLOGY_FILES}
   DESTINATION lib/${PROJECT_NAME}/${SP})
 
-set(MP topology/multi_process)
-
-set(TOPOLOGY_FILES_MULTI_PROCESS
-  ${MP}/pub_ipc_off_10b.json
-  ${MP}/pub_ipc_off_100kb.json
-  ${MP}/pub_ipc_off_1mb.json
-  ${MP}/pub_ipc_off_4mb.json
-
-  ${MP}/sub_ipc_off_10b.json
-  ${MP}/sub_ipc_off_100kb.json
-  ${MP}/sub_ipc_off_1mb.json
-  ${MP}/sub_ipc_off_4mb.json
-
-  ${MP}/pub_loaned_10b.json
-  ${MP}/pub_loaned_100kb.json
-  ${MP}/pub_loaned_1mb.json
-  ${MP}/pub_loaned_4mb.json
-
-  ${MP}/sub_loaned_10b.json
-  ${MP}/sub_loaned_100kb.json
-  ${MP}/sub_loaned_1mb.json
-  ${MP}/sub_loaned_4mb.json
-)
-
-install(FILES
-  ${TOPOLOGY_FILES_MULTI_PROCESS}
-  DESTINATION lib/${PROJECT_NAME}/${MP})
-
 set(PROFILES
-  profiles/ignore_local_endpoints.xml
-  profiles/shared_memory_fastdds_config.xml)
+  comms_benchmark/profiles/ignore_local_endpoints.xml
+  comms_benchmark/profiles/shared_memory_fastdds_config.xml)
 
 install(FILES
   ${PROFILES}
-  DESTINATION lib/${PROJECT_NAME}/profiles)
+  DESTINATION lib/${PROJECT_NAME}/comms_benchmark/profiles)
+
+set(COMMS_BENCHMARK_SCRIPTS
+  comms_benchmark/scripts/run_single_process_benchmarks.sh
+  comms_benchmark/scripts/run_multi_process_benchmarks.sh
+  comms_benchmark/scripts/run_mix_process_benchmarks.sh
+  comms_benchmark/scripts/parse_averages_single_process.py
+  comms_benchmark/scripts/parse_averages_multi_process.py
+  comms_benchmark/scripts/split_latency_all.py
+)
+
+install(FILES
+  ${COMMS_BENCHMARK_SCRIPTS}
+  DESTINATION lib/${PROJECT_NAME}/comms_benchmark/scripts)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

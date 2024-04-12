@@ -3,7 +3,7 @@
       {
         "node_name": "cordoba",
         "publishers": [
-              {"topic_name": "amazon", "msg_type": "stamped9_float32", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "amazon", "msg_type": "stamped9_float32", "period_ms": 10}
             ],
         "executor_id":1
       },
@@ -11,7 +11,7 @@
       {
         "node_name": "freeport",
         "publishers": [
-              {"topic_name": "ganges", "msg_type": "stamped4_int32", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "ganges", "msg_type": "stamped4_int32", "period_ms": 10}
             ],
         "executor_id":2
       },
@@ -19,7 +19,7 @@
       {
         "node_name": "medellin",
         "publishers": [
-              {"topic_name": "nile", "msg_type": "stamped4_int32", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "nile", "msg_type": "stamped4_int32", "period_ms": 10}
             ],
         "executor_id":3
       },
@@ -27,7 +27,7 @@
       {
         "node_name": "portsmouth",
         "publishers": [
-              {"topic_name": "danube", "msg_type": "stamped_int64", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "danube", "msg_type": "stamped_int64", "period_ms": 10}
             ],
         "executor_id":4
       },
@@ -38,7 +38,7 @@
             {"topic_name":"amazon", "msg_type":"stamped9_float32"}
           ],
         "publishers": [
-            {"topic_name": "tigris", "msg_type": "stamped4_float32", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "tigris", "msg_type": "stamped4_float32", "period_ms": 10}
           ],
         "executor_id":5
       },
@@ -52,7 +52,7 @@
             {"topic_name":"danube", "msg_type":"stamped_int64"}
           ],
         "publishers": [
-            {"topic_name": "parana", "msg_type": "stamped3_float32", "period_ms": 10, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "parana", "msg_type": "stamped3_float32", "period_ms": 10}
           ],
         "executor_id":6
       },
@@ -71,7 +71,7 @@
             {"topic_name":"columbia", "msg_type":"stamped600kb"}
           ],
         "publishers": [
-            {"topic_name": "colorado", "msg_type": "stamped4_int32", "period_ms": 200, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "colorado", "msg_type": "stamped4_int32", "period_ms": 200}
           ],
         "executor_id":8
       },
@@ -83,8 +83,8 @@
             {"topic_name":"colorado", "msg_type":"stamped4_int32"}
           ],
         "publishers": [
-            {"topic_name": "salween", "msg_type": "stamped12_float32", "period_ms": 100, "msg_pass_by":"loaned_msg"},
-            {"topic_name": "godavari", "msg_type": "stamped_vector", "msg_size": 5000, "period_ms": 200, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "salween", "msg_type": "stamped12_float32", "period_ms": 100},
+            {"topic_name": "godavari", "msg_type": "stamped_vector", "msg_size": 5000, "period_ms": 200}
           ],
         "executor_id":9
       },
@@ -96,7 +96,7 @@
             {"topic_name":"godavari", "msg_type":"stamped_vector"}
           ],
         "publishers": [
-            {"topic_name": "loire", "msg_type": "stamped_vector", "msg_size": 1000, "period_ms": 200, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "loire", "msg_type": "stamped_vector", "msg_size": 1000, "period_ms": 200}
           ],
         "executor_id":10
       },
@@ -104,7 +104,7 @@
       {
         "node_name": "kingston",
         "publishers": [
-              {"topic_name": "yamuna", "msg_type": "stamped4_int32", "period_ms": 100, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "yamuna", "msg_type": "stamped4_int32", "period_ms": 100}
             ],
         "executor_id":11
       },
@@ -112,7 +112,7 @@
       {
         "node_name": "hebron",
         "publishers": [
-              {"topic_name": "chenab", "msg_type": "stamped1kb", "period_ms": 25, "msg_pass_by":"loaned_msg"}
+              {"topic_name": "chenab", "msg_type": "stamped1kb", "period_ms": 25}
             ],
         "executor_id":12
       },
@@ -128,9 +128,9 @@
             {"topic_name": "chenab", "msg_type": "stamped1kb"}
           ],
         "publishers": [
-            {"topic_name": "missouri", "msg_type": "stamped_vector", "msg_size": 10000, "period_ms": 100, "msg_pass_by":"loaned_msg"},
-            {"topic_name": "tagus", "msg_type": "stamped_vector", "msg_size": 50000, "period_ms": 100, "msg_pass_by":"loaned_msg"},
-            {"topic_name": "brazos", "msg_type": "stamped_vector", "msg_size": 25000, "period_ms": 100, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "missouri", "msg_type": "stamped_vector", "msg_size": 10000, "period_ms": 100},
+            {"topic_name": "tagus", "msg_type": "stamped_vector", "msg_size": 50000, "period_ms": 100},
+            {"topic_name": "brazos", "msg_type": "stamped_vector", "msg_size": 25000, "period_ms": 100}
           ],
         "executor_id":13
       },
@@ -149,8 +149,8 @@
             {"topic_name": "ohio", "msg_type": "stamped100b"}
           ],
         "publishers": [
-            {"topic_name": "mekong", "msg_type": "stamped_vector", "msg_size": 100, "period_ms": 500, "msg_pass_by":"loaned_msg"},
-            {"topic_name": "congo", "msg_type": "stamped4_int32", "period_ms": 100, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "mekong", "msg_type": "stamped_vector", "msg_size": 100, "period_ms": 500},
+            {"topic_name": "congo", "msg_type": "stamped4_int32", "period_ms": 100}
           ],
         "executor_id":14
       },
@@ -161,7 +161,7 @@
             {"topic_name":"mekong", "msg_type":"stamped_vector"}
           ],
         "publishers": [
-            {"topic_name": "lena", "msg_type": "stamped_vector", "msg_size": 50, "period_ms": 100, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "lena", "msg_type": "stamped_vector", "msg_size": 50, "period_ms": 100}
           ],
         "executor_id":15
       },
@@ -172,7 +172,7 @@
             {"topic_name":"congo", "msg_type":"stamped4_int32"}
           ],
         "publishers": [
-            {"topic_name": "ohio", "msg_type": "stamped100b", "period_ms": 200, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "ohio", "msg_type": "stamped100b", "period_ms": 200}
           ],
         "executor_id":16
       },
@@ -184,7 +184,7 @@
             {"topic_name":"murray", "msg_type":"stamped_vector"}
           ],
         "publishers": [
-            {"topic_name": "volga", "msg_type": "stamped_int64", "period_ms": 500, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "volga", "msg_type": "stamped_int64", "period_ms": 500}
           ],
         "executor_id":17
       },
@@ -195,7 +195,7 @@
             {"topic_name":"mekong", "msg_type":"stamped_vector"}
           ],
         "publishers": [
-            {"topic_name": "murray", "msg_type": "stamped_vector", "msg_size": 100, "period_ms": 500, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "murray", "msg_type": "stamped_vector", "msg_size": 100, "period_ms": 500}
           ],
         "executor_id":18
       },
@@ -209,7 +209,7 @@
             {"topic_name": "tagus", "msg_type": "stamped_vector"}
           ],
         "publishers": [
-            {"topic_name": "arkansas", "msg_type": "stamped4_int32", "period_ms": 100, "msg_pass_by":"loaned_msg"}
+            {"topic_name": "arkansas", "msg_type": "stamped4_int32", "period_ms": 100}
           ],
         "executor_id":19
       },
