@@ -6,8 +6,8 @@
               {
                   "topic_name": "test",
                   "msg_type": "stamped1mb",
-                  "period_ms": 50,
-                  "msg_pass_by":"loaned_msg"
+                  "freq_hz": 50,
+                  "msg_pass_by":"shared_ptr"
               }
             ]
       }

@@ -6,7 +6,7 @@
               {
                   "topic_name": "test",
                   "msg_type": "stamped4mb",
-                  "period_ms": 100,
+                  "freq_hz": 10,
                   "msg_pass_by":"loaned_msg"
               }
             ]

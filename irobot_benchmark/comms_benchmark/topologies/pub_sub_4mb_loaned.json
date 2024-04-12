@@ -5,16 +5,17 @@
         "publishers": [
               {
                   "topic_name": "test",
-                  "msg_type": "stamped100kb",
-                  "period_ms": 100,
-                  "msg_pass_by":"unique_ptr"}
+                  "msg_type": "stamped4mb",
+                  "freq_hz": 10,
+                  "msg_pass_by":"loaned_msg"
+              }
 
             ]
       },
       {
         "node_name": "sub_node_sp",
         "subscribers":[
-            {"topic_name":"test", "msg_type":"stamped100kb"}
+            {"topic_name":"test", "msg_type":"stamped4mb"}
           ]
       }
     ]
