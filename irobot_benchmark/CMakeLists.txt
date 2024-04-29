@@ -99,7 +99,10 @@ install(FILES
 
 set(PROFILES
   comms_benchmark/profiles/ignore_local_endpoints.xml
-  comms_benchmark/profiles/shared_memory_fastdds_config.xml)
+  comms_benchmark/profiles/shared_memory_fastdds_config.xml
+  comms_benchmark/profiles/shared_memory_fastdds_dynamic_reusable.xml
+  comms_benchmark/profiles/zero-copy-shm.xml
+)
 
 install(FILES
   ${PROFILES}

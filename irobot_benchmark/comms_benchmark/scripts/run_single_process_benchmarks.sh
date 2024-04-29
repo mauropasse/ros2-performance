@@ -16,7 +16,7 @@ SP="${PWD}/results_single_process/"
 rm -rf $SP && mkdir -p $SP
 
 # Define message sizes and communication types
-comms=("ipc_on" "ipc_off" "loaned")
+comms=("ipc_on" "ipc_off" "loaned" "loaned_cyclone")
 
 topologies=(
   "pub_sub_10b"
@@ -27,15 +27,32 @@ topologies=(
   "white_mountain_fixed_size"
 )
 
+# Check if iox-roudi is running
+if pgrep -x "iox-roudi" > /dev/null
+then
+    echo "iox-roudi is running."
+else
+    echo "iox-roudi is NOT running."
+    exit 1
+fi
+
 # Loop through each combination of topology and communication type
 for topology in "${topologies[@]}"; do
     mkdir -p $SP/${topology}
 
     for comm in "${comms[@]}"; do
         # Set environment variables for "loaned" communication type
+        export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
         if [ "$comm" == "loaned" ]; then
-            export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_config_dynamic_reusable.xml"
+            export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_dynamic_reusable.xml"
             export RMW_FASTRTPS_USE_QOS_FROM_XML=1
+        fi
+
+        # Set environment variables for "loaned" communication type
+        if [ "$comm" == "loaned_cyclone" ]; then
+            export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+            export CYCLONEDDS_URI="${profiles_dir}/zero-copy-shm.xml"
         fi
 
         # Construct the command based on communication type
@@ -46,7 +63,7 @@ for topology in "${topologies[@]}"; do
         fi
 
         # Topology
-        if [ "$comm" == "loaned" ]; then
+        if [[ "$comm" == "loaned" || "$comm" == "loaned_cyclone" ]]; then
             top="${topologies_dir}/${topology}_loaned.json"
         else
             top="${topologies_dir}/${topology}.json"
@@ -56,16 +73,18 @@ for topology in "${topologies[@]}"; do
         result_folder=${comm}
 
         # Run the command
-        COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 60 -s 1000 --csv-out on --results-dir $result_folder --timers-separate-thread on"
+        COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder"
+        # COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder --timers-separate-thread on"
         echo -e "\nCommand: \n$COMMAND\n"
         eval $COMMAND
 
         mv $result_folder $SP/${topology}
 
         # Unset environment variables after running "loaned" command
-        if [ "$comm" == "loaned" ]; then
+        if [[ "$comm" == "loaned" || "$comm" == "loaned_cyclone" ]]; then
             unset FASTRTPS_DEFAULT_PROFILES_FILE
             unset RMW_FASTRTPS_USE_QOS_FROM_XML
+            unset CYCLONEDDS_URI
         fi
     done
 done
