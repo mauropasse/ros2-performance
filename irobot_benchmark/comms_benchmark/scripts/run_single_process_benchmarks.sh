@@ -34,7 +34,7 @@ for topology in "${topologies[@]}"; do
     for comm in "${comms[@]}"; do
         # Set environment variables for "loaned" communication type
         if [ "$comm" == "loaned" ]; then
-            export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_config.xml"
+            export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_config_dynamic_reusable.xml"
             export RMW_FASTRTPS_USE_QOS_FROM_XML=1
         fi
 
