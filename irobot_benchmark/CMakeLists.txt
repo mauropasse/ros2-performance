@@ -41,6 +41,7 @@ install(FILES
   DESTINATION lib/${PROJECT_NAME}/topology)
 
 set(SCRIPTS
+  scripts/compare_latency.py
   scripts/plot_latency.py
   scripts/plot_cpu_memory.py
 )
@@ -109,6 +110,8 @@ set(COMMS_BENCHMARK_SCRIPTS
   comms_benchmark/scripts/run_multi_process_benchmarks.sh
   comms_benchmark/scripts/run_mix_process_benchmarks.sh
   comms_benchmark/scripts/parse_averages_single_process.py
+  comms_benchmark/scripts/parse_latency_single_process.py
+  comms_benchmark/scripts/parse_latency_multi_process.py
   comms_benchmark/scripts/parse_averages_multi_process.py
   comms_benchmark/scripts/split_latency_all.py
 )
