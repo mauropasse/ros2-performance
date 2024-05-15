@@ -33,7 +33,7 @@ def print_output(data):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script.py input_file.csv")
+        print("Usage: python parse_averages_single_process.py average_metrics.csv")
         sys.exit(1)
 
     input_file = sys.argv[1]

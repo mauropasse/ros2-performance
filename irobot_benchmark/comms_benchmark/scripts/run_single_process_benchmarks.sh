@@ -16,7 +16,7 @@ SP="${PWD}/results_single_process/"
 rm -rf $SP && mkdir -p $SP
 
 # Define message sizes and communication types
-comms=("ipc_on" "ipc_off" "loaned" "loaned_cyclone")
+comms=("ipc_on" "ipc_off" "loaned_fastdds" "loaned_cyclone")
 
 topologies=(
   "pub_sub_10b"
@@ -32,7 +32,7 @@ if pgrep -x "iox-roudi" > /dev/null
 then
     echo "iox-roudi is running."
 else
-    echo "iox-roudi is NOT running."
+    echo "iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
     exit 1
 fi
 
@@ -41,10 +41,10 @@ for topology in "${topologies[@]}"; do
     mkdir -p $SP/${topology}
 
     for comm in "${comms[@]}"; do
-        # Set environment variables for "loaned" communication type
+        # Set environment variables
         export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-        if [ "$comm" == "loaned" ]; then
+        if [ "$comm" == "loaned_fastdds" ]; then
             export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_dynamic_reusable.xml"
             export RMW_FASTRTPS_USE_QOS_FROM_XML=1
         fi
@@ -62,8 +62,8 @@ for topology in "${topologies[@]}"; do
             ipc_option="--ipc off"
         fi
 
-        # Topology
-        if [[ "$comm" == "loaned" || "$comm" == "loaned_cyclone" ]]; then
+        # Set right topology for shared memory
+        if [[ "$comm" == "loaned_fastdds" || "$comm" == "loaned_cyclone" ]]; then
             top="${topologies_dir}/${topology}_loaned.json"
         else
             top="${topologies_dir}/${topology}.json"
@@ -80,8 +80,8 @@ for topology in "${topologies[@]}"; do
 
         mv $result_folder $SP/${topology}
 
-        # Unset environment variables after running "loaned" command
-        if [[ "$comm" == "loaned" || "$comm" == "loaned_cyclone" ]]; then
+        # Unset environment variables
+        if [[ "$comm" == "loaned_fastdds" || "$comm" == "loaned_cyclone" ]]; then
             unset FASTRTPS_DEFAULT_PROFILES_FILE
             unset RMW_FASTRTPS_USE_QOS_FROM_XML
             unset CYCLONEDDS_URI
