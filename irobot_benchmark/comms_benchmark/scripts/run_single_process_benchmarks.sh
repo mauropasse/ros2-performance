@@ -16,7 +16,8 @@ SP="${PWD}/results_single_process/"
 rm -rf $SP && mkdir -p $SP
 
 # Define message sizes and communication types
-comms=("ipc_on" "ipc_off" "loaned_fastdds" "loaned_cyclone")
+# comms=("ipc_on" "ipc_off" "loaned_fastdds" "loaned_cyclone")
+comms=("ipc_on" "ipc_off_fast" "ipc_off_cyclone" "ipc_off_zenoh")
 
 topologies=(
   "pub_sub_10b"
@@ -27,13 +28,22 @@ topologies=(
   "white_mountain_fixed_size"
 )
 
+# Check if rmw_zenohd is running
+if pgrep -x "rmw_zenohd" > /dev/null
+then
+    echo "rmw_zenohd is running."
+else
+    echo "rmw_zenohd is NOT running. Run as: ros2 run rmw_zenoh_cpp rmw_zenohd"
+    exit 1
+fi
+
 # Check if iox-roudi is running
 if pgrep -x "iox-roudi" > /dev/null
 then
     echo "iox-roudi is running."
 else
     echo "iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
-    exit 1
+    # exit 1
 fi
 
 # Loop through each combination of topology and communication type
@@ -44,16 +54,22 @@ for topology in "${topologies[@]}"; do
         # Set environment variables
         export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-        if [ "$comm" == "loaned_fastdds" ]; then
-            export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_dynamic_reusable.xml"
-            export RMW_FASTRTPS_USE_QOS_FROM_XML=1
-        fi
-
-        # Set environment variables for "loaned" communication type
-        if [ "$comm" == "loaned_cyclone" ]; then
-            export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-            export CYCLONEDDS_URI="${profiles_dir}/zero-copy-shm.xml"
-        fi
+        case "$comm" in
+            ipc_off_cyclone)
+                export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+                ;;
+            ipc_off_zenoh)
+                export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+                ;;
+            loaned_fastdds)
+                export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_preallocated_w_realloc.xml"
+                export RMW_FASTRTPS_USE_QOS_FROM_XML=1
+                ;;
+            loaned_cyclone)
+                export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+                export CYCLONEDDS_URI="${profiles_dir}/zero-copy-shm.xml"
+                ;;
+        esac
 
         # Construct the command based on communication type
         if [ "$comm" == "ipc_on" ]; then
@@ -73,7 +89,7 @@ for topology in "${topologies[@]}"; do
         result_folder=${comm}
 
         # Run the command
-        COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder"
+        COMMAND="taskset -c 0 ${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder"
         # COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder --timers-separate-thread on"
         echo -e "\nCommand: \n$COMMAND\n"
         eval $COMMAND

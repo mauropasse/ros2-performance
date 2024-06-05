@@ -12,13 +12,16 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(irobot_events_executor REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(performance_test REQUIRED)
 find_package(performance_test_factory REQUIRED)
+find_package(libyaml_vendor REQUIRED)
+find_package(rcl_yaml_param_parser REQUIRED)
+find_package(yaml REQUIRED)
+ament_export_dependencies(rcl_yaml_param_parser)
 
 add_executable(irobot_benchmark src/irobot_benchmark.cpp)
-ament_target_dependencies(irobot_benchmark rclcpp rclcpp_lifecycle performance_test performance_test_factory irobot_events_executor)
+ament_target_dependencies(irobot_benchmark rclcpp rclcpp_lifecycle performance_test performance_test_factory yaml)
 
 install(TARGETS
   irobot_benchmark
