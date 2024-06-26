@@ -3,7 +3,7 @@
 
 # Set governor to performance
 echo "echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
-echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+echo 'performance' | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 # Get the directory where the script is located
 script_dir=$(dirname "$(readlink -f "$0")")

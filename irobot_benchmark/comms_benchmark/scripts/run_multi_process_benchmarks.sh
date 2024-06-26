@@ -1,9 +1,8 @@
 #!/bin/bash
-# scp -P 2222 -r root@192.168.1.113:/data/ros2-application-qcs40x-2024_04_02/irobot_benchmark/all_results .
 
 # Set governor to performance
 echo "echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
-echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+echo 'performance' | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 # Get the directory where the script is located
 script_dir=$(dirname "$(readlink -f "$0")")
@@ -53,17 +52,25 @@ for i in "${!topology1[@]}"; do
     for comm in "${comms[@]}"; do
         mkdir -p $MP/${res}/${comm}
 
-        # Set environment variables for "loaned" communication type
-        export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-
         case "$comm" in
+            ipc_off_fast)
+                echo "RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
+                export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+                ;;
             ipc_off_cyclone)
+                echo "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
                 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
                 ;;
             ipc_off_zenoh)
+                echo "RMW_IMPLEMENTATION=rmw_zenoh_cpp"
                 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+                if [[ "$res" == "10b" ]]; then
+                    export ZENOH_SESSION_CONFIG_URI="${profiles_dir}/zenoh_low_latency.json"
+                fi
                 ;;
             loaned_fastdds)
+                echo "RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
+                export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
                 export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_preallocated_w_realloc.xml"
                 export RMW_FASTRTPS_USE_QOS_FROM_XML=1
                 ;;
@@ -86,7 +93,7 @@ for i in "${!topology1[@]}"; do
         # Results folder
 
         # Run the command
-        COMMAND="${irobot_benchmark} $top $debug_topology -x 3 --ipc off -t 10 -s 1000 --csv-out on"
+        COMMAND="${irobot_benchmark} $top $debug_topology -x 3 --ipc off -t 30 -s 1000 --csv-out on"
         echo -e "\nCommand: \n$COMMAND\n"
         eval $COMMAND
 
@@ -98,5 +105,6 @@ for i in "${!topology1[@]}"; do
             unset FASTRTPS_DEFAULT_PROFILES_FILE
             unset RMW_FASTRTPS_USE_QOS_FROM_XML
         fi
+        unset ZENOH_SESSION_CONFIG_URI
     done
 done

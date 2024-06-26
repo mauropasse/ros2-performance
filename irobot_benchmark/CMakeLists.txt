@@ -106,6 +106,7 @@ set(PROFILES
   comms_benchmark/profiles/shared_memory_fastdds_dynamic_reusable.xml
   comms_benchmark/profiles/zero-copy-shm.xml
   comms_benchmark/profiles/roudi_config.toml
+  comms_benchmark/profiles/zenoh_low_latency.json
 )
 
 install(FILES

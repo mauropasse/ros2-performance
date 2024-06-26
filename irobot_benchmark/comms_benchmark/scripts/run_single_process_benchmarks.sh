@@ -1,9 +1,8 @@
 #!/bin/bash
-# scp -P 2222 -r root@192.168.1.113:/data/ros2-application-qcs40x-2024_04_02/irobot_benchmark/all_results .
 
 # Set governor to performance
 echo "echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
-echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+echo 'performance' | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 # Get the directory where the script is located
 script_dir=$(dirname "$(readlink -f "$0")")
@@ -89,8 +88,7 @@ for topology in "${topologies[@]}"; do
         result_folder=${comm}
 
         # Run the command
-        COMMAND="taskset -c 0 ${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder"
-        # COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder --timers-separate-thread on"
+        COMMAND="${irobot_benchmark} $top -x 3 $ipc_option -t 30 -s 1000 --csv-out on --results-dir $result_folder --csv-out on"
         echo -e "\nCommand: \n$COMMAND\n"
         eval $COMMAND
 
