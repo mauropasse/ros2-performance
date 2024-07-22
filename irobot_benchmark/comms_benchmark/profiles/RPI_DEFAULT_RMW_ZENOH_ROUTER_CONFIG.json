@@ -9,25 +9,22 @@
   // id: "1234567890abcdef",
 
   /// The node's mode (router, peer or client)
-  mode: "peer",
+  mode: "router",
 
   /// Which endpoints to connect to. E.g. tcp/localhost:7447.
   /// By configuring the endpoints, it is possible to tell zenoh which router/peer to connect to at startup.
-  /// ROS setting: By default connect to the Zenoh router on localhost on port 7447.
   connect: {
     endpoints: [
-      "tcp/localhost:7447",
+      // "<proto>/<address>"
     ],
   },
 
   /// Which endpoints to listen on. E.g. tcp/localhost:7447.
   /// By configuring the endpoints, it is possible to tell zenoh which are the endpoints that other routers,
   /// peers, or client can use to establish a zenoh session.
-  /// ROS setting: By default accept incoming connections only from localhost (i.e. from colocalized Nodes).
-  ///              All communications with other hosts are routed by the Zenoh router.
   listen: {
     endpoints: [
-      "tcp/localhost:0",
+      "tcp/[::]:7447"
     ],
   },
   /// Configure the scouting mechanisms and their behaviours
@@ -39,7 +36,7 @@
     /// The multicast scouting configuration.
     multicast: {
       /// Whether multicast scouting is enabled or not
-      enabled: false,
+      enabled: true,
       /// The socket which should be used for multicast scouting
       address: "224.0.0.224:7446",
       /// The network interface which should be used for multicast scouting
@@ -131,10 +128,10 @@
       /// NOTE: Currently, the LowLatency transport doesn't preserve QoS prioritization.
       /// NOTE: Due to the note above, 'lowlatency' is incompatible with 'qos' option, so in order to
       ///       enable 'lowlatency' you need to explicitly disable 'qos'.
-      lowlatency: true,
+      lowlatency: false,
       /// Enables QoS on unicast communications.
       qos: {
-        enabled: false,
+        enabled: true,
       },
       /// Enables compression on unicast communications.
       /// Compression capabilities are negotiated during session establishment.
@@ -264,4 +261,5 @@
       write: false,
     },
   },
+
 }

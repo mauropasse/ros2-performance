@@ -106,7 +106,9 @@ set(PROFILES
   comms_benchmark/profiles/shared_memory_fastdds_dynamic_reusable.xml
   comms_benchmark/profiles/zero-copy-shm.xml
   comms_benchmark/profiles/roudi_config.toml
-  comms_benchmark/profiles/zenoh_low_latency.json
+  comms_benchmark/profiles/LAPTOP_RMW_ZENOH_SESSION_CONFIG.json
+  comms_benchmark/profiles/RPI_DEFAULT_RMW_ZENOH_ROUTER_CONFIG.json
+  comms_benchmark/profiles/RPI_LOW_LATENCY_SESSION_CONFIG.json
 )
 
 install(FILES

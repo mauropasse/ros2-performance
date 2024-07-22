@@ -53,17 +53,25 @@ for i in "${!topology1[@]}"; do
         result_folder="$MP/${res}/${comm}"
         mkdir -p $result_folder
 
-        # Set environment variables
-        export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-
         case "$comm" in
+            ipc_off_fast)
+                echo "RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
+                export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+                ;;
             ipc_off_cyclone)
+                echo "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
                 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
                 ;;
             ipc_off_zenoh)
+                echo "RMW_IMPLEMENTATION=rmw_zenoh_cpp"
                 export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+                if [[ "$res" == "10b" ]]; then
+                    export ZENOH_SESSION_CONFIG_URI="${profiles_dir}/RPI_LOW_LATENCY_SESSION_CONFIG.json"
+                fi
                 ;;
             loaned_fastdds)
+                echo "RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
+                export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
                 export FASTRTPS_DEFAULT_PROFILES_FILE="${profiles_dir}/shared_memory_fastdds_preallocated_w_realloc.xml"
                 export RMW_FASTRTPS_USE_QOS_FROM_XML=1
                 ;;
@@ -99,5 +107,6 @@ for i in "${!topology1[@]}"; do
             unset RMW_FASTRTPS_USE_QOS_FROM_XML
             unset CYCLONEDDS_URI
         fi
+        unset ZENOH_SESSION_CONFIG_URI
     done
 done
