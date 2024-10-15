@@ -47,6 +47,9 @@ set( CUSTOM_MSGS
 
 set ( CUSTOM_SRVS
   "srv/Stamped10b.srv"
+  "srv/Stamped100kb.srv"
+  "srv/Stamped1mb.srv"
+  "srv/Stamped4mb.srv"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}

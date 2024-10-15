@@ -50,58 +50,66 @@ install(FILES
   DESTINATION lib/${PROJECT_NAME}/scripts)
 
 # Communications benchamrk
-set(SP comms_benchmark/topologies)
+set(PATH comms_benchmark/topologies)
 
-set(SP_TEST_TOPOLOGY_FILES
+set(TEST_TOPOLOGY_FILES
   # Full topologies
-  ${SP}/sierra_nevada.json
-  ${SP}/sierra_nevada_fixed_size.json
-  ${SP}/sierra_nevada_fixed_size_loaned.json
-  ${SP}/white_mountain.json
-  ${SP}/white_mountain_fixed_size.json
-  ${SP}/white_mountain_fixed_size_loaned.json
+  ${PATH}/sierra_nevada.json
+  ${PATH}/sierra_nevada_fixed_size.json
+  ${PATH}/sierra_nevada_fixed_size_loaned.json
+  ${PATH}/white_mountain.json
+  ${PATH}/white_mountain_fixed_size.json
+  ${PATH}/white_mountain_fixed_size_loaned.json
 
   # Simple pub / sub
-  ${SP}/pub_sub_10b.json
-  ${SP}/pub_sub_100kb.json
-  ${SP}/pub_sub_1mb.json
-  ${SP}/pub_sub_4mb.json
+  ${PATH}/pub_sub_10b.json
+  ${PATH}/pub_sub_100kb.json
+  ${PATH}/pub_sub_1mb.json
+  ${PATH}/pub_sub_4mb.json
 
   # Publishers loaning messages
-  ${SP}/pub_sub_10b_loaned.json
-  ${SP}/pub_sub_100kb_loaned.json
-  ${SP}/pub_sub_1mb_loaned.json
-  ${SP}/pub_sub_4mb_loaned.json
+  ${PATH}/pub_sub_10b_loaned.json
+  ${PATH}/pub_sub_100kb_loaned.json
+  ${PATH}/pub_sub_1mb_loaned.json
+  ${PATH}/pub_sub_4mb_loaned.json
 
   # Full topologies (remove the ones not needed)
-  ${SP}/debug_sierra_nevada_fixed_size.json
-  ${SP}/debug_white_mountain_fixed_size.json
+  ${PATH}/debug_sierra_nevada_fixed_size.json
+  ${PATH}/debug_white_mountain_fixed_size.json
 
   # Simple pub / sub
-  ${SP}/pub_100kb.json
-  ${SP}/pub_100kb_loaned.json
-  ${SP}/pub_10b.json
-  ${SP}/pub_10b_loaned.json
-  ${SP}/pub_1mb.json
-  ${SP}/pub_1mb_loaned.json
-  ${SP}/pub_4mb.json
-  ${SP}/pub_4mb_loaned.json
-  ${SP}/sub_100kb.json
-  ${SP}/sub_10b.json
-  ${SP}/sub_1mb.json
-  ${SP}/sub_4mb.json
+  ${PATH}/pub_100kb.json
+  ${PATH}/pub_100kb_loaned.json
+  ${PATH}/pub_10b.json
+  ${PATH}/pub_10b_loaned.json
+  ${PATH}/pub_1mb.json
+  ${PATH}/pub_1mb_loaned.json
+  ${PATH}/pub_4mb.json
+  ${PATH}/pub_4mb_loaned.json
+  ${PATH}/sub_100kb.json
+  ${PATH}/sub_10b.json
+  ${PATH}/sub_1mb.json
+  ${PATH}/sub_4mb.json
+
+  # Simple client / services
+  ${PATH}/cli_srv_10b.json
+  ${PATH}/cli_srv_100kb.json
+  ${PATH}/cli_srv_1mb.json
+  ${PATH}/cli_srv_4mb.json
 )
 
 install(FILES
-  ${SP_TEST_TOPOLOGY_FILES}
-  DESTINATION lib/${PROJECT_NAME}/${SP})
+  ${TEST_TOPOLOGY_FILES}
+  DESTINATION lib/${PROJECT_NAME}/${PATH})
 
 set(PROFILES
   comms_benchmark/profiles/ignore_local_endpoints.xml
+  comms_benchmark/profiles/shared_memory_fastdds_extra_samples.xml
   comms_benchmark/profiles/shared_memory_fastdds_preallocated_w_realloc.xml
   comms_benchmark/profiles/shared_memory_fastdds_dynamic_reusable.xml
   comms_benchmark/profiles/zero-copy-shm.xml
   comms_benchmark/profiles/roudi_config.toml
+  comms_benchmark/profiles/zenoh_low_latency.json
 )
 
 install(FILES
