@@ -1,5 +1,4 @@
 #!/bin/bash
-# scp -P 2222 -r root@192.168.1.113:/data/ros2-application-qcs40x-2024_04_02/irobot_benchmark/all_results .
 
 # Set governor to performance
 echo "echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
@@ -27,13 +26,10 @@ topologies=(
   "white_mountain_fixed_size"
 )
 
-# Check if iox-roudi is running
-if pgrep -x "iox-roudi" > /dev/null
+# Check if iox-roudi is running, needed for CycloneDDS zero-copy
+if ! pgrep -x "iox-roudi" > /dev/null
 then
-    echo "iox-roudi is running."
-else
-    echo "iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
-    exit 1
+    echo "CycloneDDS: iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
 fi
 
 # Loop through each combination of topology and communication type

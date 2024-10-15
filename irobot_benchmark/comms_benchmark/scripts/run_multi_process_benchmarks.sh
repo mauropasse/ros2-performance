@@ -1,5 +1,4 @@
 #!/bin/bash
-# scp -P 2222 -r root@192.168.1.113:/data/ros2-application-qcs40x-2024_04_02/irobot_benchmark/all_results .
 
 # Set governor to performance
 echo "echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
@@ -23,15 +22,11 @@ results=("10b" "100kb" "1mb" "4mb")
 topology1=("pub_10b" "pub_100kb" "pub_1mb" "pub_4mb")
 topology2=("sub_10b" "sub_100kb" "sub_1mb" "sub_4mb")
 
-# Check if iox-roudi is running
-if pgrep -x "iox-roudi" > /dev/null
+# Check if iox-roudi is running, needed for CycloneDDS zero-copy
+if ! pgrep -x "iox-roudi" > /dev/null
 then
-    echo "iox-roudi is running."
-else
-    echo "iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
-    exit 1
+    echo "CycloneDDS: iox-roudi is NOT running. Run as: ./iox-roudi -c roudi_config.toml"
 fi
-
 
 # Loop through each index in the topology1 array
 for i in "${!topology1[@]}"; do
