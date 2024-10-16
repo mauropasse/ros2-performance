@@ -96,6 +96,10 @@ set(TEST_TOPOLOGY_FILES
   ${PATH}/cli_srv_100kb.json
   ${PATH}/cli_srv_1mb.json
   ${PATH}/cli_srv_4mb.json
+  ${PATH}/10_cli_srv_10b.json
+  ${PATH}/10_cli_srv_100kb.json
+  ${PATH}/10_cli_srv_1mb.json
+  ${PATH}/10_cli_srv_4mb.json
 )
 
 install(FILES

@@ -1,0 +1,23 @@
+{
+    "nodes": [
+        {
+            "node_name": "server_node",
+            "servers": [
+                {"service_name": "srv_name", "srv_type": "stamped4mb"}
+              ],
+            "clients": [
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 100},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000},
+                {"service_name": "srv_name", "srv_type": "stamped4mb", "period_ms": 600000}
+              ]
+        }
+    ]
+}
