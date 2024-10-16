@@ -7,7 +7,7 @@ echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 # Get the directory where the script is located
 script_dir=$(dirname "$(readlink -f "$0")")
 irobot_benchmark="${script_dir}/../../irobot_benchmark"
-topologies_dir="${script_dir}/../topologies"
+topologies_dir="${script_dir}/../topologies/pub-sub"
 profiles_dir="${script_dir}/../profiles"
 
 # Create a directory to store log folders

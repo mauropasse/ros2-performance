@@ -1,10 +1,7 @@
 {
     "nodes": [
         {
-            "node_name": "server_node",
-            "servers": [
-                {"service_name": "stamped1mb", "srv_type": "stamped1mb"}
-              ],
+            "node_name": "client_node",
             "clients": [
                 {"service_name": "stamped1mb", "srv_type": "stamped1mb", "freq_hz": 50}
               ]
@@ -14,7 +11,7 @@
             "clients": [
                 {"service_name": "stamped1mb", "srv_type": "stamped1mb", "period_ms": 600000}
               ],
-             "number": 10
+             "number": 9
         }
     ]
 }

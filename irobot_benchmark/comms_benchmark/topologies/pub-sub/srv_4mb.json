@@ -8,13 +8,6 @@
             "clients": [
                 {"service_name": "stamped4mb", "srv_type": "stamped4mb", "freq_hz": 5}
               ]
-        },
-        {
-            "node_name": "multi_node",
-            "clients": [
-                {"service_name": "stamped4mb", "srv_type": "stamped4mb", "period_ms": 600000}
-              ],
-             "number": 10
         }
     ]
 }

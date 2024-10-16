@@ -50,61 +50,88 @@ install(FILES
   DESTINATION lib/${PROJECT_NAME}/scripts)
 
 # Communications benchamrk
-set(PATH comms_benchmark/topologies)
+set(PUB_SUB_PATH comms_benchmark/topologies/pub-sub)
 
-set(TEST_TOPOLOGY_FILES
+set(PUB_SUB_TOPOLOGY_FILES
   # Full topologies
-  ${PATH}/sierra_nevada.json
-  ${PATH}/sierra_nevada_fixed_size.json
-  ${PATH}/sierra_nevada_fixed_size_loaned.json
-  ${PATH}/white_mountain.json
-  ${PATH}/white_mountain_fixed_size.json
-  ${PATH}/white_mountain_fixed_size_loaned.json
+  ${PUB_SUB_PATH}/sierra_nevada.json
+  ${PUB_SUB_PATH}/sierra_nevada_fixed_size.json
+  ${PUB_SUB_PATH}/sierra_nevada_fixed_size_loaned.json
+  ${PUB_SUB_PATH}/white_mountain.json
+  ${PUB_SUB_PATH}/white_mountain_fixed_size.json
+  ${PUB_SUB_PATH}/white_mountain_fixed_size_loaned.json
 
   # Simple pub / sub
-  ${PATH}/pub_sub_10b.json
-  ${PATH}/pub_sub_100kb.json
-  ${PATH}/pub_sub_1mb.json
-  ${PATH}/pub_sub_4mb.json
+  ${PUB_SUB_PATH}/pub_sub_10b.json
+  ${PUB_SUB_PATH}/pub_sub_100kb.json
+  ${PUB_SUB_PATH}/pub_sub_1mb.json
+  ${PUB_SUB_PATH}/pub_sub_4mb.json
 
   # Publishers loaning messages
-  ${PATH}/pub_sub_10b_loaned.json
-  ${PATH}/pub_sub_100kb_loaned.json
-  ${PATH}/pub_sub_1mb_loaned.json
-  ${PATH}/pub_sub_4mb_loaned.json
+  ${PUB_SUB_PATH}/pub_sub_10b_loaned.json
+  ${PUB_SUB_PATH}/pub_sub_100kb_loaned.json
+  ${PUB_SUB_PATH}/pub_sub_1mb_loaned.json
+  ${PUB_SUB_PATH}/pub_sub_4mb_loaned.json
 
-  # Full topologies (remove the ones not needed)
-  ${PATH}/debug_sierra_nevada_fixed_size.json
-  ${PATH}/debug_white_mountain_fixed_size.json
+  # Full topologies
+  ${PUB_SUB_PATH}/debug_sierra_nevada_fixed_size.json
+  ${PUB_SUB_PATH}/debug_white_mountain_fixed_size.json
 
   # Simple pub / sub
-  ${PATH}/pub_100kb.json
-  ${PATH}/pub_100kb_loaned.json
-  ${PATH}/pub_10b.json
-  ${PATH}/pub_10b_loaned.json
-  ${PATH}/pub_1mb.json
-  ${PATH}/pub_1mb_loaned.json
-  ${PATH}/pub_4mb.json
-  ${PATH}/pub_4mb_loaned.json
-  ${PATH}/sub_100kb.json
-  ${PATH}/sub_10b.json
-  ${PATH}/sub_1mb.json
-  ${PATH}/sub_4mb.json
+  ${PUB_SUB_PATH}/pub_100kb.json
+  ${PUB_SUB_PATH}/pub_100kb_loaned.json
+  ${PUB_SUB_PATH}/pub_10b.json
+  ${PUB_SUB_PATH}/pub_10b_loaned.json
+  ${PUB_SUB_PATH}/pub_1mb.json
+  ${PUB_SUB_PATH}/pub_1mb_loaned.json
+  ${PUB_SUB_PATH}/pub_4mb.json
+  ${PUB_SUB_PATH}/pub_4mb_loaned.json
+  ${PUB_SUB_PATH}/sub_100kb.json
+  ${PUB_SUB_PATH}/sub_10b.json
+  ${PUB_SUB_PATH}/sub_1mb.json
+  ${PUB_SUB_PATH}/sub_4mb.json
+)
+
+set(CLI_SRV_PATH comms_benchmark/topologies/cli-srv)
+
+set(CLI_SRV_TOPOLOGY_FILES
+
+  # Simple services
+  ${CLI_SRV_PATH}/srv_10b.json
+  ${CLI_SRV_PATH}/srv_100kb.json
+  ${CLI_SRV_PATH}/srv_1mb.json
+  ${CLI_SRV_PATH}/srv_4mb.json
+
+  # Simple client
+  ${CLI_SRV_PATH}/cli_10b.json
+  ${CLI_SRV_PATH}/cli_100kb.json
+  ${CLI_SRV_PATH}/cli_1mb.json
+  ${CLI_SRV_PATH}/cli_4mb.json
 
   # Simple client / services
-  ${PATH}/cli_srv_10b.json
-  ${PATH}/cli_srv_100kb.json
-  ${PATH}/cli_srv_1mb.json
-  ${PATH}/cli_srv_4mb.json
-  ${PATH}/10_cli_srv_10b.json
-  ${PATH}/10_cli_srv_100kb.json
-  ${PATH}/10_cli_srv_1mb.json
-  ${PATH}/10_cli_srv_4mb.json
+  ${CLI_SRV_PATH}/cli_srv_10b.json
+  ${CLI_SRV_PATH}/cli_srv_100kb.json
+  ${CLI_SRV_PATH}/cli_srv_1mb.json
+  ${CLI_SRV_PATH}/cli_srv_4mb.json
+
+  # Multi client
+  ${CLI_SRV_PATH}/10_cli_10b.json
+  ${CLI_SRV_PATH}/10_cli_100kb.json
+  ${CLI_SRV_PATH}/10_cli_1mb.json
+  ${CLI_SRV_PATH}/10_cli_4mb.json
+
+  # Multi client / services
+  ${CLI_SRV_PATH}/10_cli_srv_10b.json
+  ${CLI_SRV_PATH}/10_cli_srv_100kb.json
+  ${CLI_SRV_PATH}/10_cli_srv_1mb.json
+  ${CLI_SRV_PATH}/10_cli_srv_4mb.json
 )
 
 install(FILES
-  ${TEST_TOPOLOGY_FILES}
-  DESTINATION lib/${PROJECT_NAME}/${PATH})
+  ${PUB_SUB_TOPOLOGY_FILES}
+  ${CLI_SRV_TOPOLOGY_FILES}
+  DESTINATION lib/${PROJECT_NAME}/${PUB_SUB_PATH})
+
 
 set(PROFILES
   comms_benchmark/profiles/ignore_local_endpoints.xml
