@@ -3,20 +3,18 @@
         {
             "node_name": "server_node",
             "servers": [
-                {"service_name": "srv_name", "srv_type": "stamped1mb"}
+                {"service_name": "stamped1mb", "srv_type": "stamped1mb"}
               ],
             "clients": [
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "freq_hz": 50},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000},
-                {"service_name": "srv_name", "srv_type": "stamped1mb", "period_ms": 600000}
+                {"service_name": "stamped1mb", "srv_type": "stamped1mb", "freq_hz": 50}
               ]
+        },
+        {
+            "node_name": "multi_node",
+            "clients": [
+                {"service_name": "stamped1mb", "srv_type": "stamped1mb", "period_ms": 600000}
+              ],
+             "number": 10
         }
     ]
 }

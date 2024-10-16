@@ -3,10 +3,10 @@
         {
             "node_name": "server_node",
             "servers": [
-                {"service_name": "srv_name", "srv_type": "stamped4mb"}
+                {"service_name": "stamped4mb", "srv_type": "stamped4mb"}
               ],
             "clients": [
-                {"service_name": "srv_name", "srv_type": "stamped4mb", "freq_hz": 10}
+                {"service_name": "stamped4mb", "srv_type": "stamped4mb", "freq_hz": 5}
               ]
         }
     ]
